@@ -12,4 +12,5 @@ import lombok.Setter;
 public class LanguageResponseDto {
     private Long id;
     private String name;
+    private String icon;
 }

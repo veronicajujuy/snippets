@@ -1,6 +1,5 @@
-package com.backend.snippets.dto.request;
+package com.backend.snippets.dto.modify;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +10,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LanguageRequestDto {
-    @NotBlank(message = "El nombre del lenguaje no puede estar vacío")
+public class LanguageModifyDto {
+    @NotNull(message = "El id del lenguaje no puede ser nulo")
+    private Long id;
     @NotNull(message = "El nombre del lenguaje no puede ser nulo")
     private String name;
-    @NotBlank(message = "El icono del lenguaje no puede estar vacío")
     @NotNull(message = "El icono del lenguaje no puede ser nulo")
     private String icon;
 }
