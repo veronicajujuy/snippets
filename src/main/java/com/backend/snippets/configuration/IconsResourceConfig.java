@@ -13,7 +13,13 @@ public class IconsResourceConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // Configurar el manejador para servir los iconos desde ambas ubicaciones:
+        // 1. Primero busca en la carpeta de uploads (./uploads/icons/)
+        // 2. Luego busca en los recursos estáticos (classpath:/static/icons/uploaded/)
         registry.addResourceHandler("/icons/uploaded/**")
-                .addResourceLocations("file:" + uploadedIconsDir + "/");
+                .addResourceLocations(
+                    "file:" + uploadedIconsDir + "/",
+                    "classpath:/static/icons/uploaded/"
+                );
     }
 }
