@@ -52,7 +52,7 @@ public class TagService implements ITagService {
 
         // Si existe, guardamos los cambios
         tag.setName(tagModifyDto.getName());
-        return mapper.toResponseDto(tag);
+        return mapper.toResponseDto(tagRepository.save(tag));
     }
 
     @Override

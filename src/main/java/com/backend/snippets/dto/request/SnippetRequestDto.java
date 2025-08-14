@@ -26,10 +26,8 @@ public class SnippetRequestDto {
     @Size(max = 200000, message = "El código no puede exceder los 200,000 caracteres")
     @Size(min = 50, message = "El código debe tener al menos 50 caracteres")
     private String code;
-    @NotBlank(message = "El ID del lenguaje no puede estar vacío")
     @NotNull(message = "El ID del lenguaje no puede ser nulo")
     private Long languageId;
-    @NotBlank(message = "El ID de las tags no puede estar vacío")
     @NotEmpty(message = "Debe haber al menos un tag asociado")
     private List<Long> tagIds;
 }
