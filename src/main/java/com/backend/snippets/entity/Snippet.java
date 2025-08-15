@@ -3,12 +3,15 @@ package com.backend.snippets.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "snippets")
 public class Snippet {
@@ -22,6 +25,13 @@ public class Snippet {
     private String description;
     private LocalDateTime createdAt;
 
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
+
     @ManyToOne // A snippet belongs to one language
     private Language language;
 
@@ -31,5 +41,5 @@ public class Snippet {
         joinColumns = @JoinColumn(name = "snippet_id"),
         inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    private Set<Tag> tags;
+    private Set<Tag> tags = new HashSet<>();
 }

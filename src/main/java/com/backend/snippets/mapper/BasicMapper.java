@@ -20,18 +20,13 @@ public interface BasicMapper {
     // Mapping for Tag entity and DTOs
 
     Tag toEntity(TagRequestDto requestDto);
-
     TagResponseDto toResponseDto(Tag tag);
-
     Tag toEntity(TagModifyDto tagModifyDto);
-
     List<TagResponseDto> toTagDtoList(List<Tag> tags);
 
     // Mapping for Language entity and DTOs
     Language toEntity(LanguageRequestDto languageRequestDto);
-
     LanguageResponseDto toResponseDto(Language language);
     Language toEntity(LanguageModifyDto languageModifyDto);
-
     List<LanguageResponseDto> toLanguageDtoList(List<Language> languages);
 }

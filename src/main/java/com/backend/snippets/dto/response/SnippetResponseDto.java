@@ -12,10 +12,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SnippetResponseDto {
-    private Long id;
+    private String id;
     private String title;
     private String description;
     private String code;
     private LanguageResponseDto languageResponseDto;
-    private Set<TagResponseDto> tagResponseDtoSet;
+    private Set<TagResponseDto> tagResponseDtos;
 }
