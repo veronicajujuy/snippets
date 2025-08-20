@@ -13,4 +13,5 @@ public interface ISnippetService {
     SnippetResponseDto updateTag(SnippetModifyDto snippetModifyDto);
     void deleteSnippet(String id);
     List<SnippetResponseDto> getAllSnippets();
+    List<SnippetResponseDto> getSnippetsByFilters(String search, Long languageId, List<Long> tagIds, String sortBy);
 }

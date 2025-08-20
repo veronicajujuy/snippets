@@ -89,4 +89,10 @@ public class SnippetService implements ISnippetService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<SnippetResponseDto> getSnippetsByFilters(String search, Long languageId, List<Long> tagIds, String sortBy) {
+
+        return List.of();
+    }
+
 }

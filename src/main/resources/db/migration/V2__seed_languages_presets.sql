@@ -1,9 +1,6 @@
 -- Asegura que el campo name sea único
-SET @exist := (SELECT COUNT(*) FROM information_schema.statistics WHERE table_schema = DATABASE() AND table_name = 'languages' AND index_name = 'uq_languages_name');
-SET @sqlstmt := IF(@exist > 0, 'SELECT ''Index already exists.''', 'ALTER TABLE languages ADD UNIQUE KEY uq_languages_name (name)');
-PREPARE stmt FROM @sqlstmt;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
+ALTER TABLE languages
+    ADD UNIQUE KEY IF NOT EXISTS uq_languages_name (name);
 
 -- Inserta los lenguajes con sus íconos solo si no existen
 INSERT IGNORE INTO languages (name, icon) VALUES
