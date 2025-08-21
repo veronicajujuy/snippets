@@ -8,9 +8,11 @@ import com.backend.snippets.exception.ConflictException;
 import com.backend.snippets.exception.NotFoundException;
 import com.backend.snippets.mapper.SnippetMapper;
 import com.backend.snippets.repository.ISnippetRepository;
+import com.backend.snippets.repository.specifications.SnippetSpecification;
 import com.backend.snippets.service.ISnippetService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -93,6 +95,24 @@ public class SnippetService implements ISnippetService {
     public List<SnippetResponseDto> getSnippetsByFilters(String search, Long languageId, List<Long> tagIds, String sortBy) {
 
         return List.of();
+    }
+
+    @Override
+    public List<SnippetResponseDto> findByFilters(String search, Long languageId, List<Long> tagIds) {
+        Specification<Snippet> spec = (root, query, cb) -> null;
+        if (search != null && !search.isEmpty()) {
+            spec = spec.and(SnippetSpecification.hasTitleOrDescription(search));
+        }
+        if (languageId != null) {
+            spec = spec.and(SnippetSpecification.hasLanguageId(languageId));
+        }
+        if (tagIds != null && !tagIds.isEmpty()) {
+            spec = spec.and(SnippetSpecification.hasTagIds(tagIds));
+        }
+        List<Snippet> snippetsFiltered = snippetRepository.findAll(spec);
+        return snippetsFiltered.stream()
+                .map(snippetMapper::toResponseDto)
+                .toList();
     }
 
 }

@@ -22,8 +22,8 @@ public class SnippetController {
         return ResponseEntity.status(201).body(createdSnippet);
     }
 
-    @GetMapping
-    public ResponseEntity<SnippetResponseDto> getSnippetById(@RequestParam String id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<SnippetResponseDto> getSnippetById(@PathVariable String id) {
         SnippetResponseDto snippet = snippetService.getSnippetById(id);
         return ResponseEntity.ok(snippet);
     }
@@ -34,4 +34,17 @@ public class SnippetController {
         return ResponseEntity.ok(snippets);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<SnippetResponseDto>> getAllSnippets() {
+        List<SnippetResponseDto> snippets = snippetService.getAllSnippets();
+        return ResponseEntity.ok(snippets);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<SnippetResponseDto>> getSnippetsFilters(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) Long LanguageId,
+            @RequestParam(required = false) List<Long> tagIds) {
+        return ResponseEntity.ok(snippetService.findByFilters(search, LanguageId, tagIds));
+    }
 }
